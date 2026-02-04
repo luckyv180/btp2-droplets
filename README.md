@@ -64,6 +64,11 @@ This will open a web page where you can:
 - Download all images as a ZIP file.
 - (Optional) Save to a local directory.
 
+
+### Deployed Application
+The application is pre-deployed and can be accessed at:
+[Enter Deployed Link Here]
+
 ## Features
 
 - **Geometric Modeling**: Simulates droplet shape based on contact angle.
