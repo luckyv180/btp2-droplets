@@ -33,7 +33,7 @@ with st.sidebar:
 
 # --- Main Interface ---
 uploaded_file = st.file_uploader("Upload Input CSV", type=["csv"])
-output_dir = st.text_input("Local Output Directory (Optional)", help="If provided, images will be saved to this folder on the server/local machine.")
+
 
 if uploaded_file is not None:
     try:
@@ -54,9 +54,7 @@ if uploaded_file is not None:
                 
                 with zipfile.ZipFile(zip_buffer, "a", zipfile.ZIP_DEFLATED, False) as zip_file:
                     
-                    # Create local output dir if requested
-                    if output_dir:
-                        os.makedirs(output_dir, exist_ok=True)
+
 
                     for i, row in df.iterrows():
                         droplet_id = str(row['id'])
@@ -80,11 +78,7 @@ if uploaded_file is not None:
                             # Add to ZIP
                             zip_file.writestr(filename, img_bytes)
                             
-                            # Save locally if requested
-                            if output_dir:
-                                with open(os.path.join(output_dir, filename), "wb") as f:
-                                    f.write(img_bytes)
-                                    
+
                             generated_images.append({
                                 "id": droplet_id,
                                 "angle": angle,
@@ -107,8 +101,7 @@ if uploaded_file is not None:
                 
                 # --- Download Button ---
                 st.subheader("Download Results")
-                if output_dir:
-                    st.info(f"Images checked and saved to: `{output_dir}`")
+
                 
                 st.download_button(
                     label="Download All as ZIP",
